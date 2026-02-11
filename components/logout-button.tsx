@@ -3,7 +3,11 @@
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
-export default function LogoutButton() {
+interface LogoutButtonProps {
+  variant?: "default" | "destructive";
+}
+
+export default function LogoutButton({ variant = "default" }: LogoutButtonProps) {
   const router = useRouter();
   const supabase = createClient();
 
@@ -12,10 +16,15 @@ export default function LogoutButton() {
     router.push("/");
   };
 
+  const buttonClass =
+    variant === "destructive"
+      ? "bg-destructive text-destructive-foreground"
+      : "bg-destructive text-destructive-foreground";
+
   return (
     <button
       onClick={handleLogout}
-      className="bg-destructive text-destructive-foreground px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition"
+      className={`${buttonClass} px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition`}
     >
       Logout
     </button>
