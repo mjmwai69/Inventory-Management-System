@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
-import DashboardNav from "@/components/dashboard-nav";
+import DashboardLayout from "@/components/dashboard-layout";
 import { formatDate, formatCurrency } from "@/lib/utils";
 
 export default async function CollectionDetailPage({
@@ -41,8 +41,7 @@ export default async function CollectionDetailPage({
   const paymentDifference = collection.agreed_price - collection.amount_paid;
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
+    <DashboardLayout user={user}>
 
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
@@ -242,6 +241,6 @@ export default async function CollectionDetailPage({
           )}
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }
