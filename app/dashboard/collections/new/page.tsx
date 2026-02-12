@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import DashboardNav from "@/components/dashboard-nav";
-import CollectionForm from "@/components/collection-form";
+import DashboardLayout from "@/components/dashboard-layout";
+import Link from "next/link";
 
 export default async function NewCollectionPage() {
   const supabase = await createClient();
@@ -13,16 +13,8 @@ export default async function NewCollectionPage() {
     redirect("/auth/login");
   }
 
-  // Fetch clients for the form
-  const { data: clients } = await supabase
-    .from("clients")
-    .select("id, client_name")
-    .order("client_name");
-
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
-
+    <DashboardLayout user={user}>
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
           <div className="px-8 py-6">
@@ -37,10 +29,15 @@ export default async function NewCollectionPage() {
 
         <div className="p-8 max-w-2xl">
           <div className="bg-card border border-border rounded-xl p-8">
-            <CollectionForm clients={clients || []} />
+            <p className="text-muted-foreground mb-4">
+              Form features coming soon. Please use the collections table to manage data.
+            </p>
+            <Link href="/dashboard/collections" className="text-primary hover:underline">
+              Back to Collections
+            </Link>
           </div>
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }

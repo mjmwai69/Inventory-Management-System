@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import DashboardNav from "@/components/dashboard-nav";
-import ClientForm from "@/components/client-form";
+import DashboardLayout from "@/components/dashboard-layout";
+import Link from "next/link";
 
 export default async function NewClientPage() {
   const supabase = await createClient();
@@ -14,9 +14,7 @@ export default async function NewClientPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
-
+    <DashboardLayout user={user}>
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
           <div className="px-8 py-6">
@@ -29,10 +27,15 @@ export default async function NewClientPage() {
 
         <div className="p-8 max-w-2xl">
           <div className="bg-card border border-border rounded-xl p-8">
-            <ClientForm />
+            <p className="text-muted-foreground mb-4">
+              Form features coming soon. Please use the clients table to manage data.
+            </p>
+            <Link href="/dashboard/clients" className="text-primary hover:underline">
+              Back to Clients
+            </Link>
           </div>
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }
