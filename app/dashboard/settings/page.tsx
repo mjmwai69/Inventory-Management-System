@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import DashboardNav from "@/components/dashboard-nav";
+import DashboardLayout from "@/components/dashboard-layout";
 import LogoutButton from "@/components/logout-button";
 
 export default async function SettingsPage() {
@@ -14,8 +14,7 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
+    <DashboardLayout user={user}>
 
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
@@ -77,6 +76,6 @@ export default async function SettingsPage() {
           </div>
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }

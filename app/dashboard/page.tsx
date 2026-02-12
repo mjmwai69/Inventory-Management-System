@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import LogoutButton from "@/components/logout-button";
 import DashboardNav from "@/components/dashboard-nav";
+import DashboardLayout from "@/components/dashboard-layout";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -15,8 +16,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
+    <DashboardLayout user={user}>
 
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
@@ -72,7 +72,7 @@ export default async function DashboardPage() {
           </div>
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }
 

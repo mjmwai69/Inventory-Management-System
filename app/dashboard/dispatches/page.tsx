@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import DashboardNav from "@/components/dashboard-nav";
+import DashboardLayout from "@/components/dashboard-layout";
 import DispatchesTable from "@/components/dispatches-table";
 
 export default async function DispatchesPage() {
@@ -21,8 +21,7 @@ export default async function DispatchesPage() {
     .order("dispatch_date", { ascending: false });
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
+    <DashboardLayout user={user}>
 
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
@@ -56,6 +55,6 @@ export default async function DispatchesPage() {
           )}
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }

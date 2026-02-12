@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import DashboardNav from "@/components/dashboard-nav";
+import DashboardLayout from "@/components/dashboard-layout";
 import InventoryTable from "@/components/inventory-table";
 
 export default async function InventoryPage() {
@@ -29,8 +29,7 @@ export default async function InventoryPage() {
     .order("added_at", { ascending: false });
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <DashboardNav user={user} />
+    <DashboardLayout user={user}>
 
       <main className="flex-1">
         <header className="bg-card border-b border-border sticky top-0 z-40">
@@ -58,6 +57,6 @@ export default async function InventoryPage() {
           )}
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }
